@@ -1,0 +1,24 @@
+# 忽略所有 py 文件
+*.py
+
+# 允许以下脚本上传
+!scratch/CarSalesvsAirQuality1.py
+!scratch/CarSalesvsAirQuality2.py
+!scratch/CarSalesvsAirQuality3.py
+
+# 允许的 HTML
+!charts/CarSalesvsAirQuality1.html
+!charts/CarSalesvsAirQuality2.html
+!charts/CarSalesvsAirQuality3.html
+
+# 允许的数据文件
+!dataset/storyboard2_airquality_cars_tidy_2019_2024.csv
+
+# 允许的 storyboard 页面
+!storyboard/storyOne.html
+
+# 忽略虚拟环境、缓存和临时文件
+.venv/
+__pycache__/
+*.csv
+!dataset/storyboard2_airquality_cars_tidy_2019_2024.csv
