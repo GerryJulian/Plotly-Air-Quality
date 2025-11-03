@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 import plotly.express as px
 
-BASE   = Path(__file__).resolve().parents[1]
+BASE   = Path(__file__).resolve().parents[1]/"Project"
 DATA   = BASE / "dataset"
 CHARTS = BASE / "charts"
 CHARTS.mkdir(exist_ok=True)
