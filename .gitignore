@@ -1,0 +1,28 @@
+# 不要上传 IDE/虚拟环境/缓存
+.venv/
+.idea/
+__pycache__/
+*.pyc
+
+#（如果你之前写过更宽的忽略，例如 *.html 或 charts/*，需要在下方“反向放行”）
+
+# 允许这 3 个 CarSales HTML
+!charts/CarSalesvsAirQuality1.html
+!charts/CarSalesvsAirQuality2.html
+!charts/CarSalesvsAirQuality3.html
+
+# 你已经暂存的 3 个 sb2_* 也保留
+!charts/sb2_plot1_scatter_cars_vs_pm25.html
+!charts/sb2_plot2_bars_no2_by_year.html
+!charts/sb2_plot3_lines_evshare_trend.html
+
+# 允许 3 个脚本
+!scratch/CarSalesvsAirQuality1.py
+!scratch/CarSalesvsAirQuality2.py
+!scratch/CarSalesvsAirQuality3.py
+
+# 允许整洁后的数据
+!dataset/storyboard2_airquality_cars_tidy_2019_2024.csv
+
+# 允许 storyboard 页面
+!storyboard/storyOne.html
