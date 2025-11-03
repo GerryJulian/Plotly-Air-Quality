@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 import plotly.express as px
 
-BASE   = Path(__file__).resolve().parents[1]/"Project"
+BASE   = Path(__file__).resolve().parents[1]
 DATA   = BASE / "dataset"
 CHARTS = BASE / "charts"
 CHARTS.mkdir(exist_ok=True)
@@ -53,6 +53,6 @@ fig = px.scatter(
 
 fig.update_layout(title_x=0.5, legend_title_text="Country", margin=dict(l=40, r=20, t=60, b=40))
 fig.update_xaxes(type="log")
-fig.update_xaxes(tickformat=",")
+fig.update_xaxes(tickformat=".1e")
 fig.write_html(OUT, include_plotlyjs="cdn")
 print(f"✅ Saved: {OUT}")
