@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Air Quality - Background</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <style>
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease, font-weight 0.3s ease,
+          background-color 0.3s ease;
+      }
+
+      .nav-link::after {
+        display: none;
+      }
+
+      .navbar.bg-white .nav-link,
+      .navbar.bg-white .navbar-brand,
+      .navbar.bg-white .bi {
+        color: #000 !important;
+      }
+
+      .jumbotron-bg {
+        background-image: url("https://www.library.gov.au/sites/default/files/images/2024-09/collection-photo-parliament-house-representative-marriage-amendment-bill-government-davey-2017-nla-obj-735401237.jpeg");
+
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+        position: relative;
+      }
+
+      .jumbotron-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .jumbotron-text {
+        position: relative;
+        z-index: 2;
+        color: white;
+        padding: 140px 40px 100px 40px;
+      }
+
+      .jumbotron-text .nav.nav-tabs {
+        border: none;
+      }
+
+      .jumbotron-text .nav .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        margin-right: 15px;
+        border: none;
+        background: transparent;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 8px 16px;
+        transition: all 0.3s ease;
+      }
+
+      .jumbotron-text .nav .nav-link.active {
+        color: #000;
+        background: #fff;
+        border-bottom: none;
+        font-weight: bold;
+        position: relative;
+        z-index: 5;
+        padding-bottom: 14px;
+        margin-bottom: -6px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .jumbotron-text .nav .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+      }
+
+      /* Hover for inactive tabs */
+      .jumbotron-text .nav .nav-link:hover:not(.active) {
+        color: #fff;
+        border: 1px solid #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: 991.98px) {
+        .jumbotron-text {
+          padding: 80px 20px 80px 20px;
+          text-align: center;
+        }
+
+        .jumbotron-text .nav {
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .jumbotron-text .nav .nav-link {
+          color: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50px;
+          padding: 8px 18px;
+          font-weight: 500;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .jumbotron-text .nav .nav-link:hover {
+          background: #fff;
+          color: #000;
+        }
+
+        .jumbotron-text .nav .nav-link.active {
+          background: #fff;
+          color: #000;
+          font-weight: bold;
+          border: none;
+          margin-bottom: 0;
+          padding-bottom: 8px;
+        }
+      }
+
+      main.container {
+        margin-top: 0 !important;
+        padding-top: 3rem !important;
+      }
+      .hover-white:hover {
+        color: #fff !important;
+      }
+
+      .ripple-btn {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        color: black;
+        /* text color */
+        background-color: #007bff;
+        /* Bootstrap primary blue */
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+        text-decoration: none;
+      }
+
+      .ripple-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .ripple-btn:active {
+        transform: scale(0.97);
+      }
+
+      .ripple-btn::after {
+        content: "";
+        position: absolute;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        transform: scale(0);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.6s ease, opacity 0.8s ease;
+      }
+
+      .ripple-btn:hover::after {
+        transform: scale(4);
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav
+      id="mainNavbar"
+      class="navbar navbar-expand-md fixed-top bg-transparent transition"
+    >
+      <div class="container-fluid px-2 px-lg-5">
+        <!-- Left: Logo -->
+        <div class="d-flex align-items-center">
+          <img
+            src="https://wp.logos-download.com/wp-content/uploads/2022/11/Nanyang_Technological_University_Logo.png?dl"
+            alt="NTU Logo"
+            class="me-4"
+            style="height: 40px; width: auto; object-fit: contain"
+          />
+        </div>
+        <p class="navbar-brand fw-bold text-white align-items-center">
+          Government Efforts
+        </p>
+        <!-- Right: GitHub icon -->
+        <a
+          href="https://github.com/GerryJulian/Plotly-Air-Quality"
+          class="nav-link text-white align-items-center"
+          target="_blank"
+        >
+          <i class="bi bi-github fs-4"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Parallax Jumbotron -->
+    <header class="jumbotron-bg">
+      <div class="jumbotron-overlay"></div>
+      <div class="container-fluid px-4">
+        <div class="jumbotron-text">
+          <a
+            href="../main.html"
+            class="text-white-50 text-decoration-none mb-2 mb-lg-5 d-inline-flex align-items-center hover-white"
+          >
+            <i class="bi bi-arrow-left me-2"></i> Return to Home
+          </a>
+
+          <h1 class="fw-bold mb-1 mt-5">Government Efforts</h1>
+          <p class="mb-4">
+            Air pollution remains one of the world’s most pressing environmental
+            challenges — but nations are responding with bold action.
+          </p>
+
+          <!-- Secondary Navigation -->
+          <ul class="nav nav-tabs border-0">
+            <li class="nav-item">
+              <a href="background.html" class="nav-link px-3">Background</a>
+            </li>
+            <li class="nav-item">
+              <a href="storyOne.html" class="nav-link px-3">Storyline 1</a>
+            </li>
+            <li class="nav-item">
+              <a href="storyTwo.html" class="nav-link px-3">Storyline 2</a>
+            </li>
+            <li class="nav-item">
+              <a href="storyThree.html" class="nav-link active px-3"
+                >Storyline 3</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="summary.html" class="nav-link px-3">Summary</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container bg-white">
+      <p>
+        The United States, China, India, Mexico, and Brazil have each launched
+        ambitious programs to improve air quality through cleaner transport,
+        stricter regulations, and green investments. Together, their efforts
+        showcase diverse strategies driving the global transition toward cleaner
+        air.
+      </p>
+
+      <!-- US container -->
+      <div class="border rounded-4 shadow-sm bg-white overflow-hidden my-4">
+        <!-- Banner image (top of container) -->
+        <div
+          style="
+            width: 100%;
+            height: 50px;
+            background: url('../images/usFlag.png') center/cover no-repeat;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+          "
+        ></div>
+
+        <!-- Main content: text on left, chart on right -->
+        <div class="d-flex justify-content-between align-items-stretch p-4">
+          <!-- Left: Text block -->
+          <div class="flex-grow-1 me-4">
+            <div class="p-3">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-bottom: 1rem;
+                "
+              >
+                Congestion Mitigation & Air Quality Program (CMAQ)
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                Established under the <strong>Clean Air Act</strong>, the
+                <strong>Congestion Mitigation and Air Quality (CMAQ)</strong>
+                program is a U.S. federal initiative that provides funding for
+                transportation projects designed to
+                <em>reduce harmful emissions</em> and
+                <em>improve air quality</em> in densely populated regions.
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 500;
+                  font-family: 'Segoe UI Semibold', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                Project scope includes:
+              </p>
+
+              <ul
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                <li>Development of public transit infrastructure</li>
+                <li>
+                  Installation of electric vehicle (EV) charging stations and
+                  alternative fuel facilities
+                </li>
+                <li>
+                  Promotion of advanced vehicle technologies and alternative
+                  fuel adoption
+                </li>
+                <li>
+                  Enhancement of multi-modal access through bicycle and
+                  pedestrian lanes
+                </li>
+                <li>
+                  Support for shared micromobility initiatives such as e-bikes
+                  and scooters
+                </li>
+              </ul>
+
+              <p
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                <em>Source: U.S. Department of Transportation</em>
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Chart area -->
+          <div
+            class="flex-shrink-0 d-flex align-items-center justify-content-center"
+            style="width: 55%; border-radius: 8px; overflow: hidden"
+          >
+            <iframe
+              src="../charts/usGovEfforts.html"
+              style="
+                width: 100%;
+                height: 100%;
+                border: none;
+                border-radius: 8px;
+              "
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <!-- End of US container -->
+
+      <!-- China container -->
+      <div class="border rounded-4 shadow-sm bg-white overflow-hidden my-4">
+        <!-- Banner image (top of container) -->
+        <div
+          style="
+            width: 100%;
+            height: 50px;
+            background: url('../images/chinaFlag.png') center/cover no-repeat;
+            background-size: 100% 100%;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            overflow: hidden;
+          "
+        ></div>
+
+        <!-- Main content: text on right, chart on left -->
+        <div class="d-flex justify-content-between align-items-stretch p-4">
+          <!-- Left: Chart area -->
+          <div
+            class="flex-shrink-0 d-flex align-items-center justify-content-center"
+            style="width: 55%; border-radius: 8px; overflow: hidden"
+          >
+            <iframe
+              src="../charts/chinaGovEfforts.html"
+              style="
+                width: 100%;
+                height: 100%;
+                border: none;
+                border-radius: 8px;
+              "
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <!-- Right: Text block -->
+          <div class="flex-grow-1 me-4">
+            <div class="p-3">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-bottom: 1rem;
+                "
+              >
+                Beijing-Tianjin-Hebei Air Pollution Control Program
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                Driven by a comprehensive, multi-sector investment strategy,
+                this program aims to reduce air pollutants and carbon emissions
+                at their sources. Its initiatives focus on
+                <em>enhancing energy efficiency</em>,
+                <em>expanding clean energy adoption</em>, and
+                <em>strengthening air pollution controls</em>. The program
+                covers industrial modernization as well as transport
+                infrastructure improvements.
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                To date, the total investment in this program amounts to
+                <strong>US$1.3</strong>
+                billion, jointly contributed by the <strong>World Bank</strong>,
+                <strong>Huaxia Commercial Bank</strong>, and its
+                <strong>sub-borrowers</strong>.
+              </p>
+
+              <p
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                <em>Source: World Bank Group</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of China container -->
+
+      <!-- India container -->
+      <div class="border rounded-4 shadow-sm bg-white overflow-hidden my-4">
+        <!-- Banner image (top of container) -->
+        <div
+          style="
+            width: 100%;
+            height: 50px;
+            background: url('../images/indiaFlag.png') center/cover no-repeat;
+            background-size: contain;
+            background-size: 100% 100%;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            overflow: hidden;
+          "
+        ></div>
+
+        <!-- Main content: text on left, chart on right -->
+        <div class="d-flex justify-content-between align-items-stretch p-4">
+          <!-- Left: Text block -->
+          <div class="flex-grow-1 me-4">
+            <div class="p-3">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-bottom: 1rem;
+                "
+              >
+                National Clean Air Program (NCAP)
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                Launched in 2019, the <strong>NCAP</strong> aims to improve
+                India’s air quality by cutting particulate matter (PM) levels by
+                <strong>20%–30%</strong> by 2024, later extended to
+                <strong> 2026</strong> with an increased target of
+                <strong>40%</strong>. A major initiative under NCAP was the
+                installation of
+                <strong>
+                  Continuous Ambient Air Quality Monitoring Stations</strong
+                >
+                across 130 cities to
+                <em>better identify pollution hotspots</em> and
+                <em>guide targeted mitigation measures</em>.
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                However, poor air quality in India stems from multiple sources,
+                not just vehicle emissions. As shown in the pie chart,
+                <strong>vehicle-related initiatives</strong> accounted for only
+                <strong>14%</strong> of NCAP’s 2024 funding, revealing a
+                <strong>disproportionate allocation</strong> that underscores
+                the program’s lack of a holistic approach.
+              </p>
+
+              <p
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                <em>Source: Centre for Research on Energy and Clean Air</em>
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Chart area -->
+          <div
+            class="flex-shrink-0 d-flex align-items-center justify-content-center"
+            style="width: 55%; border-radius: 8px; overflow: hidden"
+          >
+            <iframe
+              src="../charts/indiaGovEfforts.html"
+              style="
+                width: 100%;
+                height: 100%;
+                border: none;
+                border-radius: 8px;
+              "
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <!-- End of India container -->
+
+      <!-- Mexico & Brazil container -->
+      <div class="border rounded-4 shadow-sm bg-white overflow-hidden my-4">
+        <!-- Banner image (top of container) -->
+        <div
+          style="
+            width: 100%;
+            height: 50px;
+            background: url('../images/mexico-brazilFlag.png') center/cover
+              no-repeat;
+            background-size: contain;
+            background-size: 100% 100%;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            overflow: hidden;
+          "
+        ></div>
+
+        <!-- Main content -->
+        <div class="d-flex justify-content-between align-items-stretch p-4">
+          <div class="flex-grow-1 me-4">
+            <div class="p-3">
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-bottom: 1rem;
+                "
+              >
+                Mexico City's ProAire Program
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                First launched in <strong>1995</strong>, the ProAire Program
+                remains an active cornerstone of Mexico City’s air-quality
+                strategy. Over the years, it has achieved several notable
+                milestones, including:
+              </p>
+
+              <ul
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                <li>
+                  Implementation of a
+                  <strong>weekly “Hoy No Circula” (“No-Drive Day”)</strong>
+                  to reduce vehicle emissions
+                </li>
+                <li>
+                  Introduction of a
+                  <strong>low-emission Metrobus system</strong> to improve
+                  public transport efficiency
+                </li>
+                <li>
+                  Efforts to make the city <strong>less car-centric</strong> by
+                  expanding <strong>bike lanes</strong> and
+                  <strong>public bicycle stations</strong>
+                </li>
+                <li>
+                  Promotion of <stong>hybrid and electric taxis</stong> as
+                  cleaner mobility alternatives
+                </li>
+              </ul>
+
+              <p
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                <em>Source: Centre for Public Impact - Founded by BCG</em>
+              </p>
+
+              <p
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-bottom: 1rem;
+                  margin-top: 3rem;
+                "
+              >
+                Brazil's National Policy on Air Quality (Law Passed in May 2024)
+              </p>
+
+              <p
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                The new policy establishes a
+                <strong>unified national air quality monitoring system</strong>
+                across Brazil to safeguard public health and the environment.
+                Its provisions include:
+              </p>
+
+              <ul
+                style="
+                  font-size: 0.95rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  line-height: 1.6;
+                "
+              >
+                <li>
+                  Creation of the
+                  <strong>National Air Quality Information System</strong>
+                </li>
+                <li>
+                  <strong>Tax incentives</strong> for companies adopting cleaner
+                  technologies and sustainable practices
+                </li>
+                <li>
+                  <strong>Public education initiatives</strong> to raise
+                  awareness about air quality and pollution impacts on health
+                </li>
+                <li>
+                  Establishment of a
+                  <strong>national air pollution mitigation fund</strong>,
+                  financed through fines and penalties imposed on environmental
+                  violators
+                </li>
+              </ul>
+
+              <p
+                style="
+                  font-size: 0.85rem;
+                  font-weight: 400;
+                  font-family: 'Segoe UI', sans-serif;
+                  margin-top: 0.75rem;
+                "
+              >
+                <em>Source: Mayer Brown Publications</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of Mexico & Brazil container -->
+
+      <!-- Next Storyline Button (now outside the container) -->
+      <div class="my-5 text-center">
+        <a
+          class="ripple-btn z-2 py-2 px-3 bg-primary rounded-2 text-white text-decoration-none mt-5"
+          href="./summary.html"
+        >
+          Next Storyline
+        </a>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const navbar = document.getElementById("mainNavbar")
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 70) {
+          navbar.classList.add("bg-white", "shadow-sm")
+          navbar.classList.remove("bg-transparent")
+          navbar
+            .querySelectorAll(".nav-link, .navbar-brand, .bi")
+            .forEach((el) => el.classList.replace("text-white", "text-dark"))
+        } else {
+          navbar.classList.remove("bg-white", "shadow-sm")
+          navbar.classList.add("bg-transparent")
+          navbar
+            .querySelectorAll(".nav-link, .navbar-brand, .bi")
+            .forEach((el) => el.classList.replace("text-dark", "text-white"))
+        }
+      })
+    </script>
+  </body>
+</html>
