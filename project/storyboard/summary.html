@@ -141,58 +141,59 @@
       margin-top: 0 !important;
       padding-top: 3rem !important;
     }
-     .hover-white:hover {
-    color: #fff !important;
-  }
+
+    .hover-white:hover {
+      color: #fff !important;
+    }
 
 
-        .ripple-btn {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            color: black;
-            /* text color */
-            background-color: #007bff;
-            /* Bootstrap primary blue */
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
-            text-decoration: none;
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      color: black;
+      /* text color */
+      background-color: #007bff;
+      /* Bootstrap primary blue */
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+      text-decoration: none;
 
-        }
-
-
-        .ripple-btn:hover {
-            background-color: #0056b3;
-        }
+    }
 
 
-        .ripple-btn:active {
-            transform: scale(0.97);
-        }
+    .ripple-btn:hover {
+      background-color: #0056b3;
+    }
 
 
-        .ripple-btn::after {
-            content: "";
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            transform: scale(0);
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.6s ease, opacity 0.8s ease;
-        }
+    .ripple-btn:active {
+      transform: scale(0.97);
+    }
 
 
-        .ripple-btn:hover::after {
-            transform: scale(4);
-            opacity: 1;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            transform-origin: center;
-        }
+    .ripple-btn::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.6s ease, opacity 0.8s ease;
+    }
+
+
+    .ripple-btn:hover::after {
+      transform: scale(4);
+      opacity: 1;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform-origin: center;
+    }
   </style>
 </head>
 
@@ -204,14 +205,15 @@
       <div class="d-flex  align-items-center">
         <img src="https://wp.logos-download.com/wp-content/uploads/2022/11/Nanyang_Technological_University_Logo.png?dl"
           alt="NTU Logo" class="me-4" style="height: 40px; width: auto; object-fit: contain;">
-        
+
       </div>
       <p class="navbar-brand fw-bold text-white align-items-center d-none d-sm-none d-md-block  "> Summary</p>
       <!-- Right: GitHub icon -->
-        <a href="https://github.com/GerryJulian/Plotly-Air-Quality" class="nav-link text-white align-items-center" target="_blank">
-          <i class="bi bi-github fs-4"></i>
-        </a>
-     
+      <a href="https://github.com/GerryJulian/Plotly-Air-Quality" class="nav-link text-white align-items-center"
+        target="_blank">
+        <i class="bi bi-github fs-4"></i>
+      </a>
+
     </div>
   </nav>
 
@@ -228,7 +230,7 @@
 
         <h1 class="fw-bold mb-1 mt-5">Summary</h1>
         <p class="mb-4">Explore how increasing vehicle ownership correlates with changing air quality
-                        levels.</p>
+          levels.</p>
 
         <!-- Secondary Navigation -->
         <ul class="nav nav-tabs border-0">
@@ -244,14 +246,37 @@
 
   <!-- Main Content -->
   <main class="container bg-white">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas placerat est, nec mollis justo
-      volutpat in. Donec tincidunt erat in urna luctus, at facilisis tortor cursus. Integer volutpat nisl nec erat
-      tristique, ut suscipit lorem malesuada.</p>
-    <p>Scroll down to see the parallax effect in action — the image stays, but text scrolls!</p>
+    <p>Storyline 1 begins with the presentation of the problem, showing the air pollution data from 2019 to 2023. The
+      data indicates that as the number of cars increases, the pressure on air quality is constantly intensifying.However, the data also reveals that this relationship varies from country to country, indicating that there are
+      other factors playing a moderating role, such as policies, technology and wealth levels.
+    </p>
+    <p>
+      Storyline 2 conducts an in-depth cause analysis, mainly focusing on the factors influencing car sales. Through our
+      visual charts, it reveals that the key to determining car sales is not population, but economic capacity and
+      consumption structure. Air pollution is not merely caused by "a large population", but rather depends on how a
+      country develops and consumes.
+    </p>
+    <p>Storyline 3 showcases solutions, ranging from the strict emission regulations in the United States, to large-scale
+      investment plans in countries like China and India, and to urban governance and legal innovation in Mexico and
+      Brazil. Various countries are promoting the transformation of new energy transportation methods and changes in
+      public behavior in different ways.</p>
 
-    <div class="ratio ratio-16x9 w-20 h-10 shadow border rounded-4 overflow-hidden">
-      <iframe src="../charts/test.html" title="test"></iframe>
+    <p>Overall, the design of our storyboard this time logically presents "phenomenon → cause → response", that is, from
+      relevance to driving force and then to solution. Based on this underlying logic, we have demonstrated the
+      interactive relationship among car sales, population/economic growth and environmental governance through three
+      progressive storylines, and ultimately concluded that air quality is determined by economic goals. Technological
+      innovation and policy setting jointly determine it. To achieve a clean air environment, a balance must be struck
+      among the three.</p>
+
+       <!-- Contine Next Button -->
+    <div class="my-5 text-center">
+      <a class="ripple-btn z-2 py-2 px-3 bg-primary rounded-2 text-white text-decoration-none mt-5"
+        href="../main.html">
+        Back to Home
+      </a>
     </div>
+      
+  
   </main>
 
   <!-- Scripts -->
